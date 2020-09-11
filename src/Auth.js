@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import app from "./base";
+import { app } from "./base";
 
 export const AuthContext = React.createContext();
 
@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   if (pending) {
-    return <>Loading...</>;
+    return <React.Fragment>Loading...</React.Fragment>;
   }
 
   return (

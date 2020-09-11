@@ -12,6 +12,11 @@ var firebaseConfig = {
   measurementId: "G-ZSP3C26YPJ",
 };
 
+const uiConfig = {
+  signInFlow: "popup",
+  signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
+};
+
 const app = firebase.initializeApp(firebaseConfig);
 
-export default app;
+export { app, uiConfig };

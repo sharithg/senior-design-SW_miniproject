@@ -4,23 +4,20 @@ import { Home, Login, Register } from "./components";
 import { AuthProvider } from "./Auth";
 import PrivateRoute from "./common/PrivateRoute";
 
-class App extends React.component {
-  
-
-  
+class App extends React.Component {
   render() {
     return (
       <AuthProvider>
-      <Router>
-        <div>
-          <PrivateRoute exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-        </div>
-      </Router>
-    </AuthProvider>
+        <Router>
+          <div>
+            <PrivateRoute exact path="/" component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+          </div>
+        </Router>
+      </AuthProvider>
     );
   }
 }
 
-export default App;  
+export default App;

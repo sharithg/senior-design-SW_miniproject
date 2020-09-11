@@ -1,20 +1,22 @@
-import React, { useCallback, useContext } from "react";
+import React, { useCallback, useContext, useRef } from "react";
 import { withRouter, Redirect } from "react-router";
-import app from "../../base.js";
+import { app, uiConfig } from "../../base.js";
 import { AuthContext } from "../../Auth.js";
-// UI
+import * as firebase from "firebase/app";
+// MUI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Divider from "@material-ui/core/Divider";
+//Firebase UI
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -50,10 +52,13 @@ function Copyright() {
 }
 
 const Login = ({ history }) => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
   const handleLogin = useCallback(
     async (event) => {
       event.preventDefault();
-      const { email, password } = event.target.elements;
+      const [email, password] = [emailRef.current, passwordRef.current];
       try {
         await app
           .auth()
@@ -78,10 +83,16 @@ const Login = ({ history }) => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
+
+        <Divider />
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
         <Typography component="h1" variant="h5">
-          Sign in
+          Or
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleLogin}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -91,6 +102,7 @@ const Login = ({ history }) => {
             label="Email Address"
             name="email"
             autoComplete="email"
+            inputRef={emailRef}
             autoFocus
           />
           <TextField
@@ -102,11 +114,8 @@ const Login = ({ history }) => {
             label="Password"
             type="password"
             id="password"
+            inputRef={passwordRef}
             autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
           />
           <Button
             type="submit"
@@ -124,7 +133,7 @@ const Login = ({ history }) => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
