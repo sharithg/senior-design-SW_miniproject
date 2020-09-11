@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import app from "./base";
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = React.useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [pending, setPending] = useState(true);
+
   React.useEffect(() => {
-    app.auth().onAuthStateChanged(setCurrentUser);
+    app.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setPending(false);
+    });
   }, []);
+
+  if (pending) {
+    return <>Loading...</>;
+  }
 
   return (
     <AuthContext.Provider value={{ currentUser }}>
