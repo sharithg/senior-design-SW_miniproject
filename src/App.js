@@ -4,9 +4,13 @@ import { Home, Login, Register } from "./components";
 import { AuthProvider } from "./Auth";
 import PrivateRoute from "./common/PrivateRoute";
 
-function App() {
-  return (
-    <AuthProvider>
+class App extends React.component {
+  
+
+  
+  render() {
+    return (
+      <AuthProvider>
       <Router>
         <div>
           <PrivateRoute exact path="/" component={Home} />
@@ -15,7 +19,8 @@ function App() {
         </div>
       </Router>
     </AuthProvider>
-  );
+    );
+  }
 }
 
-export default App;
+export default App;  
