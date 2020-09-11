@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Home, Login, Register } from "./components";
+import { AuthProvider } from "./Auth";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Iker <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.component {
+  
+
+  
+  render() {
+    return (
+      <AuthProvider>
+      <Router>
+        <div>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
+        </div>
+      </Router>
+    </AuthProvider>
+    );
+  }
 }
 
 export default App;  
