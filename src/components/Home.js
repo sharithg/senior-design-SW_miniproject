@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { app } from "../base";
 import { AuthContext } from "../Auth";
-
+import NotFound from "../common/NotFound";
 export default function Home() {
   const { currentUser } = useContext(AuthContext);
 
