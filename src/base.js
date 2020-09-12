@@ -1,7 +1,8 @@
 import * as firebase from "firebase/app";
 require("firebase/auth");
+require("firebase/database");
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyCf_mkXtz0olQbQCvkxSQIsBDxHG3gmUWc",
   authDomain: "formidable-code-289123.firebaseapp.com",
   databaseURL: "https://formidable-code-289123.firebaseio.com",

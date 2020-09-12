@@ -2,7 +2,6 @@ import React, { useCallback, useContext, useRef } from "react";
 import { withRouter, Redirect } from "react-router";
 import { app, uiConfig } from "../../base.js";
 import { AuthContext } from "../../Auth.js";
-import * as firebase from "firebase/app";
 // MUI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -54,6 +53,7 @@ function Copyright() {
 const Login = ({ history }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  var database = app.database();
 
   const handleLogin = useCallback(
     async (event) => {
@@ -74,6 +74,8 @@ const Login = ({ history }) => {
   const { currentUser } = useContext(AuthContext);
   const classes = useStyles();
 
+  console.log(currentUser);
+
   if (currentUser) {
     return <Redirect to="/" />;
   }
@@ -85,10 +87,7 @@ const Login = ({ history }) => {
         <Avatar className={classes.avatar}></Avatar>
 
         <Divider />
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={app.auth()} />
         <Typography component="h1" variant="h5">
           Or
         </Typography>
