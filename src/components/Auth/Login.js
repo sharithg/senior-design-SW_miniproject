@@ -54,6 +54,7 @@ const Login = ({ history }) => {
   const emailRef = useRef();
   const passwordRef = useRef();
   var database = app.database();
+  app.database()
 
   const handleLogin = useCallback(
     async (event) => {

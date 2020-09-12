@@ -4,9 +4,15 @@ import { AuthContext } from "../Auth";
 
 export default function Home() {
   const { currentUser } = useContext(AuthContext);
+
+  var admins = app.database().ref("admins/");
+  admins.on("value", function (snapshot) {
+    console.log(snapshot.val());
+  });
+
   return (
     <React.Fragment>
-      <h1>{currentUser.displayName}</h1>
+      <h1>{currentUser.email}</h1>
       <button onClick={() => app.auth().signOut()}>Logout</button>
     </React.Fragment>
   );

@@ -1,12 +1,11 @@
 import { app } from "../base.js";
 
-const writeUserData = (userId, name, email, displayName) => {
+const addAdmin = (userId, name, email) => {
   app
     .database()
-    .ref("users/" + userId)
+    .ref("admins/" + userId)
     .set({
       username: name,
       email: email,
-      displayName: displayName,
     });
 };
