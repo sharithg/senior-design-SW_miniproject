@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { Helmet } from "react-helmet";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,9 @@ const Loader = () => {
         height: "100vh",
       }}
     >
+      <Helmet>
+        <title>Loading...</title>
+      </Helmet>
       <CircularProgress color="secondary" />
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "../Auth";
-import { app } from "../base";
+import { app, db } from "../base";
 import Loader from "./Loader";
 import NotFound from "./NotFound";
 
@@ -10,18 +10,14 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
   const [adminUsers, setAdminUsers] = useState([]);
 
   const retriveAdmins = () => {
-    app
-      .database()
-      .ref("admins/")
-      .on("value", function (snapshot) {
-        const admins = snapshot.val();
-        const adminArr = [];
-        if (snapshot && snapshot.exists()) {
-          Object.keys(admins).forEach((key) => {
-            adminArr.push(admins[key].email);
-          });
-          setAdminUsers(adminArr);
-        }
+    var admins = [];
+    db.collection("admins")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          admins.push(doc.data().email);
+        });
+        setAdminUsers(admins);
       });
   };
   useEffect(() => {

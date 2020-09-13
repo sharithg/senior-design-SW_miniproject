@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from "react";
 import { withRouter } from "react-router";
-import { app } from "../../base";
+import { app, db } from "../../base";
 // MUI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -15,6 +15,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+import { Helmet } from "react-helmet";
 
 function Copyright() {
   return (
@@ -51,17 +53,15 @@ const useStyles = makeStyles((theme) => ({
 
 const Register = ({ history }) => {
   const classes = useStyles();
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
+  const fullNameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
 
   const handleSignUp = useCallback(
     async (event) => {
       event.preventDefault();
-      const [first_name, last_name, email, password] = [
-        firstNameRef.current,
-        lastNameRef.current,
+      const [full_name, email, password] = [
+        fullNameRef.current,
         emailRef.current,
         passwordRef.current,
       ];
@@ -69,11 +69,6 @@ const Register = ({ history }) => {
         await app
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value)
-          .then(function (result) {
-            return result.user.updateProfile({
-              displayName: `${first_name.value} ${last_name.value}`,
-            });
-          })
           .then(function () {
             history.push("/");
           });
@@ -87,16 +82,20 @@ const Register = ({ history }) => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      <Helmet>
+        <title>CovidTrack &bull; Register</title>
+      </Helmet>
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <img src="/covid-tracker-logo.png" style={{ height: "50px" }} />
+
+        <br />
+        <br />
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
         <form className={classes.form} onSubmit={handleSignUp}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12}>
               <TextField
                 autoComplete="fname"
                 name="firstName"
@@ -104,23 +103,12 @@ const Register = ({ history }) => {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
-                inputRef={firstNameRef}
+                label="Full Name"
+                inputRef={fullNameRef}
                 autoFocus
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                inputRef={lastNameRef}
-                autoComplete="lname"
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 variant="outlined"

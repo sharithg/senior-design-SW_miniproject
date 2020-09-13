@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { app } from "./base";
+import { app, db } from "./base";
 import Loader from "./common/Loader";
 export const AuthContext = React.createContext();
 
