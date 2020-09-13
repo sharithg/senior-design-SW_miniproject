@@ -11,16 +11,23 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
+  navBar: {
+    backgroundColor: '#e5e5e5' 
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
+    color: '#14213d'
   },
+  textColor: {
+    color: '#14213d' 
+  }
 }));
 
 
-export default function Home() { 
+export default function Header() { 
   const classes = useStyles();
 
   const { currentUser } = useContext(AuthContext);
@@ -32,15 +39,15 @@ export default function Home() {
 
   return (
     <React.Fragment>
-      <AppBar position="static">
+      <AppBar className={classes.navBar} position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
+            <MenuIcon className={classes.textColor} />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.title}> 
             {currentUser.email}
           </Typography>
-          <Button onClick = {() => app.auth().signOut()} color="inherit">Logout</Button>
+          <Button className={classes.textColor} onClick = {() => app.auth().signOut()} color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
     </React.Fragment>
