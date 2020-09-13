@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core'
 import React from 'react'
 import StatsList from './StatsList'
 
@@ -10,6 +11,9 @@ export default function Stats({stats}) {
 
   return ( 
     <div>
+      <Typography variant="h2" >
+        Stats:
+      </Typography>
       {renderedList}
     </div>
   )

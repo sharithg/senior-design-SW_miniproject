@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "1rem",
   },
   imgSize: {
-    height: "2.4rem",
+    height: "2rem",
   },
 }));
 
@@ -50,18 +50,11 @@ export default function Header() {
     <React.Fragment>
       <AppBar className={classes.navBar} position="static">
         <Toolbar>
-          <IconButton
-            size="small"
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <img className={classes.imgSize} src={Logo} alt="Logo image" />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Helix Medical
-          </Typography>
+          <div className = {classes.root}>
+            <a href = "/" >
+              <img className={classes.imgSize} src={Logo} alt="Logo image" />
+            </a>
+          </div>
           <Typography variant="body1" className={classes.title}>
             Your current Covid status is:
           </Typography>

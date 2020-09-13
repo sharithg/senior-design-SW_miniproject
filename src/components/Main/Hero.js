@@ -11,11 +11,13 @@ export default class Hero extends Component {
   render() {
     return (
       <div className = "hero-box">
+        <div className = "stats-box">
         <Stats stats={this.props.stats} />
+        </div>
         <div className ='img-box'> 
           <img className = "corona-img" src = {HeroImage} alt = "Coronavirus imageeee" />
         </div>
       </div>
     )
   }
-}
+}          
