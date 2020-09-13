@@ -41,7 +41,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" href="https://material-ui.com/"> 
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -134,7 +134,7 @@ const Login = ({ history }) => {
             </Grid>
             <Grid item>
               <Link href="/register" variant="body2">
-                {"Don't have an account? Sign Up"}
+                Don't have an account? Sign Up
               </Link>
             </Grid>
           </Grid>
