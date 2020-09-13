@@ -5,14 +5,14 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import NotFound from "../../common/NotFound";
 import { AppBar, IconButton, Toolbar, Button, Typography } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import Logo from '../../img/logo.png'
    
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   navBar: {
-    backgroundColor: '#e5e5e5' 
+    backgroundColor: '#ffffff' 
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
     color: '#14213d'
   },
   textColor: {
-    color: '#14213d' 
+    color: '#14213d',
+    marginRight: '1rem'  
+  },
+  imgSize: {
+    height: '2.4rem',
   }
 }));
 
@@ -41,11 +45,17 @@ export default function Header() {
     <React.Fragment>
       <AppBar className={classes.navBar} position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon className={classes.textColor} />
+          <IconButton size ="small" edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <img className ={classes.imgSize} src = {Logo} alt ="Logo image" /> 
           </IconButton>
-          <Typography variant="h6" className={classes.title}> 
-            {currentUser.email}
+          <Typography variant = "h6" className = {classes.title}>
+            Helix Medical
+          </Typography>
+          <Typography variant="body1" className={classes.title}>
+            Your current Covid status is: 
+          </Typography>
+          <Typography variant="body1" className={classes.textColor}> 
+            Logged in as: {currentUser.email.substring(0, currentUser.email.indexOf('@'))}
           </Typography>
           <Button className={classes.textColor} onClick = {() => app.auth().signOut()} color="inherit">Logout</Button>
         </Toolbar>

@@ -8,7 +8,8 @@ import axios from 'axios';
 export default class Home extends Component {
 
   state = {
-    stats: []
+    stats: [],
+    counter: 0
   }
 
  async componentDidMount() {
@@ -22,8 +23,7 @@ export default class Home extends Component {
     return (
       <div>
         <Header />
-        <Hero />
-        <Stats stats={this.state.stats} />
+        <Hero stats = {this.state.stats} />
       </div>
     )
   }
