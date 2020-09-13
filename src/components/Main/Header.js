@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    color: '#14213d'
+    color: '#000'
   },
   textColor: {
-    color: '#14213d',
+    color: '#000',
     marginRight: '1rem'  
   },
   imgSize: {

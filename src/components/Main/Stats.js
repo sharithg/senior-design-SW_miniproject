@@ -3,12 +3,12 @@ import StatsList from './StatsList'
 
 export default function Stats({stats}) {
 
-  const sorted = stats.sort(compare)
-  const renderedList = sorted.reverse().map((stat) => {
+  const sorted = stats.sort(compare).reverse()
+  const renderedList = sorted.slice(0,5).map((stat) => {
     return <StatsList stat={stat} />
   })
 
-  return (
+  return ( 
     <div>
       {renderedList}
     </div>

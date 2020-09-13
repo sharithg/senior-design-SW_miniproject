@@ -13,7 +13,7 @@ export default class Hero extends Component {
       <div className = "hero-box">
         <Stats stats={this.props.stats} />
         <div className ='img-box'> 
-          <img className = "corona-img" src = {HeroImage} alt = "Coronavirus image" />
+          <img className = "corona-img" src = {HeroImage} alt = "Coronavirus imageeee" />
         </div>
       </div>
     )
