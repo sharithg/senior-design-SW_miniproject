@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Header from "./Main/Header";
 import Hero from "./Main/Hero";
 import Tracker from "./Main/Tracker";
+import Search from './Main/Search';
+import SearchBar from './Main/SearchBar';
 
 import axios from "axios";
 
@@ -10,6 +12,7 @@ export default class Home extends Component {
     stats: [],
     counter: 0,
     symptoms: [],
+    country: [],
     checked: [false,false,false,false,false,false,false,false]
   };
 
@@ -37,6 +40,14 @@ export default class Home extends Component {
     console.log(this.state.counter);
   }
 
+  onTermSubmit = (term) => {
+    console.log(this.state.country)
+    this.setState({country: this.state.stats.filter((el) => {
+      return el.Slug === term
+    })})
+    console.log(this.state.country)
+  }
+
   getStyles = () => {
     if (this.state.counter === 0) {
       return {
@@ -61,6 +72,8 @@ export default class Home extends Component {
         <Header counter = {this.state.counter} />
         <Hero stats={this.state.stats} />
         <Tracker checked = {this.state.checked} getStyles = {this.getStyles} onCheckboxChange = {this.onCheckboxChange} /> 
+        <SearchBar onTermSubmit = {this.onTermSubmit} />
+        <Search country = {this.state.country}/>
       </div>
     );
   }

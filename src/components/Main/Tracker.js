@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import yellow from '@material-ui/core/colors/yellow';
+import './Tracker.css' 
 import { FormControlLabel, Checkbox, FormControl, InputLabel, Input, FormHelperText, Typography, Button } from '@material-ui/core';
 
 const YellowCheckbox = withStyles({
@@ -49,7 +50,7 @@ export default function Tracker({ checked, getStyles, onCheckboxChange }) {
   const classes = useStyles();
 
   return (
-    <div  style = {{backgroundColor: '#343a40'}}>  
+    <div className = 'container-main'>  
     <div className = {classes.secondaryContainer}>
       <Typography className = {classes.textColor} variant="h2">
         Symptom tracker
