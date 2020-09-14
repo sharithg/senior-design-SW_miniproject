@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   navBar: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#fbfbfb",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -26,17 +26,20 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: "#000",
+    margin: 'auto'
   },
   textColor: {
     color: "#000",
     marginRight: "1rem",
   },
   imgSize: {
-    height: "2.4rem",
+    height: "2rem",
   },
 }));
 
-export default function Header() {
+export default function Header({counter}) {
+
+  const status = counter > 0 ? 'Time to get checked' : "Cleared"
   const classes = useStyles();
 
   const { currentUser } = useContext(AuthContext);
@@ -44,26 +47,19 @@ export default function Header() {
   db.collection("admins")
     .get()
     .then((snapshot) => {
-      console.log(snapshot);
+      //console.log(snapshot);
     });
   return (
     <React.Fragment>
-      <AppBar className={classes.navBar} position="static">
+      <AppBar style={{ margin: 0 }} className={classes.navBar} position="static">
         <Toolbar>
-          <IconButton
-            size="small"
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <img className={classes.imgSize} src={Logo} alt="Logo image" />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Helix Medical
-          </Typography>
+          <div className = {classes.root}>
+            <a href = "/" >
+              <img className={classes.imgSize} src={Logo} alt="Logo image" />
+            </a>
+          </div>
           <Typography variant="body1" className={classes.title}>
-            Your current Covid status is:
+            Your current Covid status is: {status}  
           </Typography>
           <Typography variant="body1" className={classes.textColor}>
             Logged in as:{" "}
