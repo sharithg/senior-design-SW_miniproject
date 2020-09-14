@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: "#000",
+    margin: 'auto'
   },
   textColor: {
     color: "#000",
@@ -36,7 +37,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+export default function Header({counter}) {
+
+  const status = counter > 0 ? 'Time to get checked' : "Cleared"
   const classes = useStyles();
 
   const { currentUser } = useContext(AuthContext);
@@ -44,11 +47,11 @@ export default function Header() {
   db.collection("admins")
     .get()
     .then((snapshot) => {
-      console.log(snapshot);
+      //console.log(snapshot);
     });
   return (
     <React.Fragment>
-      <AppBar className={classes.navBar} position="static">
+      <AppBar style={{ margin: 0 }} className={classes.navBar} position="static">
         <Toolbar>
           <div className = {classes.root}>
             <a href = "/" >
@@ -56,7 +59,7 @@ export default function Header() {
             </a>
           </div>
           <Typography variant="body1" className={classes.title}>
-            Your current Covid status is:
+            Your current Covid status is: {status}  
           </Typography>
           <Typography variant="body1" className={classes.textColor}>
             Logged in as:{" "}
