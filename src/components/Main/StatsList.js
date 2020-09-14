@@ -4,7 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   textColor: {
-    color: 'black' 
+    color: 'black',
+    fontSize: '2rem'
   }
 }));
 
@@ -15,7 +16,7 @@ export default function StatsList({stat}) {
     <div>
       <List>
         <ListItem>
-          <ListItemText className = {classes.textColor} primary = {`${stat.Country}: ${stat.TotalDeaths}`}/>
+          <ListItemText primaryTypographyProps className = {classes.textColor} disableTypography primary={<Typography variant="h5" style={{ color: '#000' }}> {`${stat.Country}: ${stat.TotalDeaths}`}</Typography>} />
         </ListItem>
       </List>
       <Divider light = {true} /> 

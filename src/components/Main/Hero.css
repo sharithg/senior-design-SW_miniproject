@@ -5,10 +5,11 @@
   position: relative; 
   margin: 0;
   padding: 0; 
+  text-align: center; 
 }
 
 .img-box {
-  width: 35%;
+  width: 33%;
   position: absolute;
   top: 50%;
   left: 50%; 
@@ -18,13 +19,24 @@
 
 .stats-box {
   position: absolute;
-  top: 25%;
+  top: 30%;
   left: 15%;    
 }
 
 .corona-img { 
 width: 100%;
 animation: rotate 30s infinite linear, blendIn 0.2s ease-in;
+}
+
+.hero-text {
+transform: translate(1rem, 2rem);
+
+} 
+
+.sub-text {
+  position: absolute;
+  left: 50%;
+  top: 90%; 
 }
 
 @keyframes rotate {

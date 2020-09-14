@@ -12,7 +12,7 @@ export default function Stats({stats}) {
   return ( 
     <div>
       <Typography variant="h2" >
-        Stats:
+        Top Deaths:
       </Typography>
       {renderedList}
     </div>
