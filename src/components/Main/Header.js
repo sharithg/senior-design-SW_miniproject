@@ -51,7 +51,7 @@ export default function Header({counter}) {
     });
   return (
     <React.Fragment>
-      <AppBar style={{ margin: 0 }} className={classes.navBar} position="static">
+      <AppBar className={classes.navBar} position="static">
         <Toolbar>
           <div className = {classes.root}>
             <a href = "/" >
