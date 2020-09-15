@@ -23,7 +23,7 @@ const YellowCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-const useStyles = makeStyles((theme) => ({
+const styles = (theme) => ({
   container: {
     width: "100%",
     height: "40vh",
@@ -51,62 +51,81 @@ const useStyles = makeStyles((theme) => ({
   textColorTwo: {
     marginBottom: "3rem",
   },
-}));
+});
 
-export default function Tracker({ checked, getStyles, onCheckboxChange }) {
-  const classes = useStyles();
-  const symptoms = [
-    "Cough",
-    "Cough",
-    "Cough",
-    "Cough",
-    "Cough",
-    "Cough",
-    "Cough",
-    "Cough",
-  ];
+class Tracker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.symptoms = [
+      "Coughing",
+      "Coughing",
+      "Coughing",
+      "Coughing",
+      "Coughing",
+      "Coughing",
+      "Coughing",
+      "Coughing",
+    ];
+  }
 
-  return (
-    <div className="container-main">
-      <div className={classes.secondaryContainer}>
-        <Typography className={classes.textColor} variant="h2">
-          Symptom tracker
-        </Typography>
+  state = {
+    checked: [false, false, false, false, false, false, false, false],
+  };
+
+  onCheckboxChange = (num) => {
+    let check = [...this.state.checked];
+    check[num] = !this.state.checked[num];
+    this.setState({ checked: check }, () => {
+      this.props.counterCheck(this.state.checked);
+    });
+  };
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className="container-main">
+        <div className={classes.secondaryContainer}>
+          <Typography className={classes.textColor} variant="h2">
+            Symptom tracker
+          </Typography>
+        </div>
+        <div className={classes.container}>
+          {this.symptoms.map((symptom, index) => (
+            <FormControlLabel
+              variant
+              labelPlacement="top"
+              control={
+                <YellowCheckbox
+                  className={classes.checkBox}
+                  checked={this.state.checked[index]}
+                  onChange={() => this.onCheckboxChange(index)}
+                  name="checkedB"
+                  color="primary"
+                />
+              }
+              label={
+                <Typography className={classes.textColor} variant="h5">
+                  {symptom}
+                </Typography>
+              }
+            />
+          ))}
+        </div>
+        <div className={classes.thirdContainer}>
+          <Typography
+            className={classes.textColorTwo}
+            variant="h4"
+            style={this.props.getStyles()}
+          >
+            You need to get checked
+          </Typography>
+        </div>
+        <Button variant="contained" color="primary" size="large">
+          Submit
+        </Button>
       </div>
-      <div className={classes.container}>
-        {symptoms.map((symptom, index) => (
-          <FormControlLabel
-            variant
-            labelPlacement="top"
-            control={
-              <YellowCheckbox
-                className={classes.checkBox}
-                checked={checked[index]}
-                onChange={() => onCheckboxChange(index)}
-                name="checkedB"
-                color="primary"
-              />
-            }
-            label={
-              <Typography className={classes.textColor} variant="h5">
-                {symptom}
-              </Typography>
-            }
-          />
-        ))}
-      </div>
-      <div className={classes.thirdContainer}>
-        <Typography
-          className={classes.textColorTwo}
-          variant="h4"
-          style={getStyles()}
-        >
-          You need to get checked
-        </Typography>
-      </div>
-      <Button variant="contained" color="primary" size="large">
-        Submit
-      </Button>
-    </div>
-  );
+    );
+  }
 }
+
+export default withStyles(styles, { withTheme: true })(Tracker);

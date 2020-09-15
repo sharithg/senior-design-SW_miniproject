@@ -13,7 +13,6 @@ export default class Home extends Component {
     counter: 0,
     symptoms: [],
     country: [],
-    checked: [false, false, false, false, false, false, false, false],
   };
 
   async componentDidMount() {
@@ -22,32 +21,22 @@ export default class Home extends Component {
     this.setState({ stats: results.data.Countries });
   }
 
-  onCheckboxChange = (num) => {
-    let check = [...this.state.checked];
-    check[num] = !this.state.checked[num];
-    this.setState({ checked: check }, () => {
-      console.log(this.state.checked);
-    });
+  counterCheck = (checked) => {
     let count = 0;
-    this.state.checked.map((element) => {
+    checked.map((element) => {
       if (element) {
         count += 1;
       }
     });
-    this.setState({ counter: count }, () => {
-      console.log(this.state.counter);
-    });
-    console.log(this.state.counter);
+    this.setState({ counter: count });
   };
 
   onTermSubmit = (term) => {
-    console.log(this.state.country);
     this.setState({
       country: this.state.stats.filter((el) => {
-        return el.Slug === term;
+        return el.Slug === term.toLowerCase();
       }),
     });
-    console.log(this.state.country);
   };
 
   getStyles = () => {
@@ -73,9 +62,25 @@ export default class Home extends Component {
       <div>
         <Header counter={this.state.counter} />
         <Hero stats={this.state.stats} />
-        <Tracker getStyles={this.getStyles} />
-        <SearchBar onTermSubmit={this.onTermSubmit} />
-        <Search country={this.state.country} />
+        <Tracker
+          counterCheck={this.counterCheck}
+          checked={this.state.checked}
+          getStyles={this.getStyles}
+          onCheckboxChange={this.onCheckboxChange}
+        />
+        <div
+          style={{
+            width: "80vw",
+            margin: "auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <SearchBar onTermSubmit={this.onTermSubmit} />
+          <Search country={this.state.country} />
+        </div>
       </div>
     );
   }
