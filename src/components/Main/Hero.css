@@ -19,8 +19,9 @@
 
 .stats-box {
   position: absolute;
-  top: 30%;
-  left: 15%;    
+  top: 27%;
+  left: 15%;   
+  width: 15%; 
 }
 
 .corona-img { 

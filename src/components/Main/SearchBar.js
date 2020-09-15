@@ -21,11 +21,11 @@ class SearchBar extends React.Component {
 
   render() {
     return(
-      <div style={{marginTop: '2rem'}}>
+      <div style={{margin: '2rem 0 2rem 0', width: '30%'}}>
         
          <form onSubmit = {this.onFormSubmit}>
            <div className = "field">
-             <TextField inputProps={{min: 0, style: { textAlign: 'center' }}}  id='standard-basic' label="Search for a country" value={this.state.term} onChange = {this.onInputChange}  />
+             <TextField fullWidth inputProps={{min: 0, style: { textAlign: 'center' }}}  id='standard-basic' label="Search for a country" value={this.state.term} onChange = {this.onInputChange}  />
            </div>
          </form>
       </div>
