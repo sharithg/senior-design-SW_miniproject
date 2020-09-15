@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import Header from "./Main/Header";
 import Hero from "./Main/Hero";
 import Tracker from "./Main/Tracker";
-import Search from './Main/Search';
-import SearchBar from './Main/SearchBar';
+import Search from "./Main/Search";
+import SearchBar from "./Main/SearchBar";
 
 import axios from "axios";
 
@@ -13,7 +13,7 @@ export default class Home extends Component {
     counter: 0,
     symptoms: [],
     country: [],
-    checked: [false,false,false,false,false,false,false,false]
+    checked: [false, false, false, false, false, false, false, false],
   };
 
   async componentDidMount() {
@@ -24,56 +24,58 @@ export default class Home extends Component {
 
   onCheckboxChange = (num) => {
     let check = [...this.state.checked];
-    check[num] = !this.state.checked[num]   
-    this.setState({checked: check}, () => {
+    check[num] = !this.state.checked[num];
+    this.setState({ checked: check }, () => {
       console.log(this.state.checked);
     });
     let count = 0;
     this.state.checked.map((element) => {
-      if (element) { 
-        count += 1
+      if (element) {
+        count += 1;
       }
-    })
-    this.setState({ counter: count}, () => {
-      console.log(this.state.counter)
-      })
+    });
+    this.setState({ counter: count }, () => {
+      console.log(this.state.counter);
+    });
     console.log(this.state.counter);
-  }
+  };
 
   onTermSubmit = (term) => {
-    console.log(this.state.country)
-    this.setState({country: this.state.stats.filter((el) => {
-      return el.Slug === term
-    })})
-    console.log(this.state.country)
-  }
+    console.log(this.state.country);
+    this.setState({
+      country: this.state.stats.filter((el) => {
+        return el.Slug === term;
+      }),
+    });
+    console.log(this.state.country);
+  };
 
   getStyles = () => {
     if (this.state.counter === 0) {
       return {
-        color: '#343a40',
-      } 
+        color: "#343a40",
+      };
     } else if (this.state.counter === 1) {
       return {
-        color: 'yellow',
-        textShadow: '0 2px 1.3rem yellow'
-      }
+        color: "yellow",
+        textShadow: "0 2px 1.3rem yellow",
+      };
     } else {
       return {
-        color: 'red',
-        textShadow: '0 2px 1.3rem red' 
-      } 
+        color: "red",
+        textShadow: "0 2px 1.3rem red",
+      };
     }
-  }
+  };
 
   render() {
     return (
       <div>
-        <Header counter = {this.state.counter} />
+        <Header counter={this.state.counter} />
         <Hero stats={this.state.stats} />
-        <Tracker checked = {this.state.checked} getStyles = {this.getStyles} onCheckboxChange = {this.onCheckboxChange} /> 
-        <SearchBar onTermSubmit = {this.onTermSubmit} />
-        <Search country = {this.state.country}/>
+        <Tracker getStyles={this.getStyles} />
+        <SearchBar onTermSubmit={this.onTermSubmit} />
+        <Search country={this.state.country} />
       </div>
     );
   }

@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useRef } from "react";
 import { withRouter, Redirect } from "react-router";
 import { app, uiConfig } from "../../base.js";
 import { AuthContext } from "../../Auth.js";
+import register_img from "../../img/login_register_img.jpg";
 // MUI
 
 import Button from "@material-ui/core/Button";
@@ -26,8 +27,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage:
-      "url(https://coresourceexchange.org/wp-content/uploads/2020/03/3591843.jpg)",
+    backgroundImage: `url(${register_img})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -140,10 +140,7 @@ const Login = ({ history }) => {
               inputRef={passwordRef}
               autoComplete="current-password"
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+
             <Button
               type="submit"
               fullWidth
@@ -154,11 +151,7 @@ const Login = ({ history }) => {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              <Grid item xs></Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
                   {"Don't have an account? Sign Up"}

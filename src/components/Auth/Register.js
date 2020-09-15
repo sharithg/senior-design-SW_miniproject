@@ -1,22 +1,58 @@
-import React, { useCallback, useRef } from "react";
-import { withRouter } from "react-router";
-import { app, db } from "../../base";
+import React, { useCallback, useContext, useRef } from "react";
+import { withRouter, Redirect } from "react-router";
+import { app, uiConfig } from "../../base.js";
+import { AuthContext } from "../../Auth.js";
 // MUI
-import Avatar from "@material-ui/core/Avatar";
+
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Grid from "@material-ui/core/Grid";
+//import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
-
+//Firebase UI
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import register_img from "../../img/login_register_img.jpg";
 import { Helmet } from "react-helmet";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: "100vh",
+  },
+  image: {
+    backgroundImage: `url(${register_img})`,
+    backgroundRepeat: "no-repeat",
+    backgroundColor:
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  },
+  paper: {
+    margin: theme.spacing(8, 4),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 function Copyright() {
   return (
@@ -31,40 +67,15 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3),
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2),
-  },
-}));
-
 const Register = ({ history }) => {
-  const classes = useStyles();
-  const fullNameRef = useRef();
   const emailRef = useRef();
+  const fullNameRef = useRef();
   const passwordRef = useRef();
 
   const handleSignUp = useCallback(
     async (event) => {
       event.preventDefault();
-      const [full_name, email, password] = [
-        fullNameRef.current,
-        emailRef.current,
-        passwordRef.current,
-      ];
+      const [email, password] = [emailRef.current, passwordRef.current];
       try {
         await app
           .auth()
@@ -79,90 +90,97 @@ const Register = ({ history }) => {
     [history]
   );
 
+  const { currentUser } = useContext(AuthContext);
+  const classes = useStyles();
+
+  console.log(currentUser);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
+
   return (
-    <Container component="main" maxWidth="xs">
+    <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Helmet>
-        <title>CovidTrack &bull; Register</title>
-      </Helmet>
-      <div className={classes.paper}>
-        <img src="/covid-tracker-logo.png" style={{ height: "50px" }} />
+      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        {" "}
+        <CssBaseline />
+        <Helmet>
+          <title>CovidTrack &bull; Login</title>
+        </Helmet>
+        <div className={classes.paper}>
+          <img src="/covid-tracker-logo.png" style={{ height: "50px" }} />
+          <br />
+          <br />
 
-        <br />
-        <br />
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} onSubmit={handleSignUp}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="Full Name"
-                inputRef={fullNameRef}
-                autoFocus
-              />
+          <form className={classes.form} onSubmit={handleSignUp}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  autoComplete="fname"
+                  name="firstName"
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="firstName"
+                  label="Full Name"
+                  inputRef={fullNameRef}
+                  autoFocus
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  inputRef={emailRef}
+                  autoComplete="email"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  inputRef={passwordRef}
+                  autoComplete="current-password"
+                />
+              </Grid>
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                inputRef={emailRef}
-                autoComplete="email"
-              />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Register
+            </Button>
+            <Grid container>
+              <Grid item xs></Grid>
+              <Grid item>
+                <Link href="/login" variant="body2">
+                  {"Already have an account? Log In"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                inputRef={passwordRef}
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="/login" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+            <Box mt={5}>
+              <Copyright />
+            </Box>
+          </form>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 
