@@ -24,14 +24,36 @@
   width: 15%; 
 }
 
+@media only screen and (max-width: 1400px) {
+  .stats-box {
+    position: absolute;
+    top: 30%;
+    left: 10%;    
+    width: 25%; 
+    transform: scale(0.7);
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .stats-box {
+    position: absolute;
+    top: 25%;
+    left: 8%;    
+    width: 30%; 
+  }
+}
+
 .corona-img { 
 width: 100%;
 animation: rotate 30s infinite linear, blendIn 0.2s ease-in;
 }
 
 .hero-text {
-transform: translate(1rem, 2rem);
-
+transform: translate(1rem, 3rem);
+} 
+@media only screen and (max-width: 1000px) {
+  .hero-text {
+    transform: translate(1rem, 4rem) scale(0.7);
+  }
 } 
 
 .sub-text {
