@@ -11,7 +11,7 @@ class Admin extends React.Component {
  state = {
    people: [{
      email: "Fred",
-     formFilled: true,
+     formFilled: false,
      hasSymptoms: false,
    },
    {
@@ -19,7 +19,7 @@ class Admin extends React.Component {
     formFilled: false,
     hasSymptoms: true,
   },{
-    email: "Iker",
+    email: "Iker@bu.edu",
     formFilled: true,
     hasSymptoms: false,
   },{

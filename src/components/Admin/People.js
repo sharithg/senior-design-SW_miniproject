@@ -4,7 +4,7 @@ import './People.css';
 
 export default function People({people}) {
 
-  const form = people.formFilled ? "Hello form" : "no form found"
+  const form = people.formFilled ? "Completed form" : "no form found"
 
   return (
     <div>
@@ -14,6 +14,9 @@ export default function People({people}) {
       </div>
       <div>
         <Typography >{form}</Typography> 
+      </div>
+      <div>
+        <Typography>has symptoms</Typography>
       </div>
     </div>
     <Divider />
