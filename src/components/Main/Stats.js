@@ -10,7 +10,7 @@ export default function Stats({stats}) {
   })
 
   return ( 
-    <div>
+    <div className = "media-list">
       <Typography variant="h2" >
         Top Deaths:
       </Typography>

@@ -29,7 +29,7 @@ class Admin extends React.Component {
   },{
     email: "Alexa",
     formFilled: true,
-    hasSymptoms: false,
+    hasSymptoms: true, 
   },{
     email: "Sofia",
     formFilled: true,
