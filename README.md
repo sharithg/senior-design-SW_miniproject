@@ -16,6 +16,19 @@ Simply log into the app using google auth or create your own account with email 
 
 **Here is the project hosted on netlify:** [CovidTrack](https://5f63d15bcfe63e0008233746--heuristic-meninsky-b6057c.netlify.app/) 
 
+To run locally:
+
+
+``` bash
+npm i -g yarn
+cd /to/project/directory/containing/package.json/
+yarn
+```
+once packages are installed:
+``` bash
+yarn start
+```
+
 ## Admin Info
 
 To access the admin page please use the below credentials:

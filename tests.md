@@ -22,3 +22,7 @@
 - [x] Table: correctly updates to new user responses
 - [x] Percentage: correctly calculate percentage with symptoms
 
+``` bash
+npm i
+```
+
