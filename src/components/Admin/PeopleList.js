@@ -1,26 +1,113 @@
-import { Typography } from '@material-ui/core';
-import React from 'react'
-import People from './People';
-import './PeopleList.css';
+import { Divider, Typography } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import "./PeopleList.css";
+import { keys } from "@material-ui/core/styles/createBreakpoints";
+import "./Counter.css";
+//MUI
+import { makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
-export default function peopleList({people}) {
+const useStyles = makeStyles({
+  table: {
+    minWidth: 650,
+  },
+});
 
-const renderedPeople = people.slice(0,10).map((people) => {
+export default function PeopleList({ users, responseUsers }) {
+  const [people, setPeople] = useState([]);
+  const [perc, setPerc] = useState(null);
+  const classes = useStyles();
+
+  useEffect(() => {
+    if (users && responseUsers) {
+      console.log(users);
+      console.log(responseUsers);
+      var i = 0;
+      var peopleArr = [];
+      var numHas = 0;
+      for (const [userKey, userValue] of Object.entries(users)) {
+        var hasResponded = false;
+        var num_symptoms = 0;
+        for (const [resKey, resValue] of Object.entries(responseUsers)) {
+          if (resKey === userKey) {
+            hasResponded = true;
+            num_symptoms = resValue.num_symptoms;
+            if (resValue.num_symptoms > 0) numHas++;
+          }
+        }
+        peopleArr.push({ email: userValue.email, hasResponded, num_symptoms });
+      }
+      setPerc((numHas / peopleArr.length) * 100);
+      setPeople(peopleArr);
+    }
+  }, [users, responseUsers]);
+
   return (
-  <div>
-    <People people = {people} />
-  </div>
-)})
-
-  return (
-    <div className = 'main-container'>
-      <Typography  variant ='h2'>Admin Panel</Typography>
+    <div className="main-container">
+      <Typography variant="h2">Admin Panel</Typography>
       <div className="peopleList-container">
-        <div className="people-list">
-          {renderedPeople} 
+        <TableContainer component={Paper}>
+          <Table
+            className={classes.table}
+            size="small"
+            aria-label="a dense table"
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell align="left">Email</TableCell>
+                <TableCell align="left">Form submitted today?</TableCell>
+                <TableCell align="left">Number of symptoms</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {people.length > 0 ? (
+                <React.Fragment>
+                  {people.map((person, index) => (
+                    <TableRow key={index}>
+                      <TableCell align="left">{person.email}</TableCell>
+                      <TableCell align="left">
+                        {person.hasResponded ? "Yes" : "No"}
+                      </TableCell>
+                      <TableCell align="left">
+                        {!person.hasResponded ? (
+                          <React.Fragment />
+                        ) : (
+                          <Typography>{person.num_symptoms}</Typography>
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </React.Fragment>
+              ) : (
+                <Typography variant="h2">No users responded today</Typography>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+      <div className="counter-container">
+        <div className="counter-text">
+          <Typography variant="h4">
+            Percentage of people that have symptoms{" "}
+          </Typography>
+        </div>
+        <Divider className="divider" />
+        <div className="alt-text">
+          {people.length > 0 ? (
+            <React.Fragment>
+              <Typography variant="h2">{perc.toFixed(0)}%</Typography>
+            </React.Fragment>
+          ) : (
+            <Typography variant="h2">No users responded today</Typography>
+          )}
         </div>
       </div>
     </div>
-    
-  )
+  );
 }

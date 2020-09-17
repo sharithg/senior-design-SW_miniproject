@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import { rdb } from "../../base";
 import { AuthContext } from "../../Auth";
+import formatDate from "../../common/formatDate";
 
 const YellowCheckbox = withStyles({
   root: {
@@ -54,17 +55,7 @@ const styles = (theme) => ({
     marginBottom: "3rem",
   },
 });
-function formatDate(date) {
-  var d = new Date(date),
-    month = "" + (d.getMonth() + 1),
-    day = "" + d.getDate(),
-    year = d.getFullYear();
 
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-
-  return [year, month, day].join("-");
-}
 class Tracker extends React.Component {
   constructor(props) {
     super(props);
@@ -102,24 +93,26 @@ class Tracker extends React.Component {
   handleSubmit = async () => {
     var d = new Date();
     var today = formatDate(d);
-    const userEmail = this.state.user.currentUser.email.split("@")[0];
+    console.log(this.state.user.currentUser);
+    const userEmailSplit = this.state.user.currentUser.email.split("@");
+    const userEmail = `${userEmailSplit[0]}-${userEmailSplit[1]}`;
 
     const data = {};
-    data[userEmail] = {
+    const user_id = this.state.user.currentUser.uid;
+    data[user_id] = {
+      email: this.state.user.currentUser.email,
       num_symptoms: this.state.checked.filter((val) => val === true).length,
     };
     const dataObj = {
+      email: this.state.user.currentUser.email,
       num_symptoms: this.state.checked.filter((val) => val === true).length,
     };
     var ref = rdb.ref(`responses/${today}`);
     ref.on(
       "value",
       function (snapshot) {
-        if (snapshot.val()) {
-          ref.child(userEmail).set(dataObj);
-        } else {
-          ref.set(data);
-        }
+        if (snapshot.val()) ref.child(user_id).set(dataObj);
+        else ref.set(data);
       },
       function (errorObject) {
         console.log("The read failed: " + errorObject.code);

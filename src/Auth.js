@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { app, db } from "./base";
+import { app, rdb } from "./base";
 import Loader from "./common/Loader";
 export const AuthContext = React.createContext();
 
@@ -12,6 +12,17 @@ export const AuthProvider = ({ children }) => {
     app.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
       setPending(false);
+      // firebase
+      var ref = rdb.ref(`users/${user.uid}`);
+      ref.on(
+        "value",
+        function (snapshot) {
+          if (!snapshot.val()) ref.set({ email: user.email });
+        },
+        function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        }
+      );
     });
   }, []);
 
