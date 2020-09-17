@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "../Auth";
-import { app, db } from "../base";
+import { db } from "../base";
 import Loader from "./Loader";
 import NotFound from "./NotFound";
 

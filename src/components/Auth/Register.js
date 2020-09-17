@@ -1,14 +1,12 @@
 import React, { useCallback, useContext, useRef } from "react";
 import { withRouter, Redirect } from "react-router";
-import { app, uiConfig } from "../../base.js";
+import { app } from "../../base.js";
 import { AuthContext } from "../../Auth.js";
 // MUI
 
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -17,7 +15,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 //Firebase UI
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import register_img from "../../img/login_register_img.jpg";
 import { Helmet } from "react-helmet";
 
@@ -110,7 +107,11 @@ const Register = ({ history }) => {
           <title>CovidTrack &bull; Login</title>
         </Helmet>
         <div className={classes.paper}>
-          <img src="/covid-tracker-logo.png" style={{ height: "50px" }} />
+          <img
+            src="/covid-tracker-logo.png"
+            style={{ height: "50px" }}
+            alt="covid-tracker"
+          />
           <br />
           <br />
 

@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React from "react";
 import { Helmet } from "react-helmet";
 import Header from "./Main/Header";
 import PeopleList from "./Admin/PeopleList";
-import Counter from "./Admin/Counter";
 import { formatDate } from "../common/formatDate";
 import { rdb } from "../base";
 
@@ -54,8 +54,6 @@ class Admin extends React.Component {
 
   componentDidMount() {
     //calling firebase
-    var users;
-    var responseUsers;
     var d = new Date();
     var today = formatDate(d);
     console.log(today);

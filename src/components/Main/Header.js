@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useContext, useState, useEffect } from "react";
 import { app, rdb } from "../../base";
 import { AuthContext } from "../../Auth";
@@ -5,14 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { formatDate } from "../../common/formatDate";
 import Loader from "../../common/Loader";
 
-import NotFound from "../../common/NotFound";
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import { AppBar, Toolbar, Button, Typography } from "@material-ui/core";
 import Logo from "../../img/logo.png";
 
 const useStyles = makeStyles((theme) => ({

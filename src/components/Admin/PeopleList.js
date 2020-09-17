@@ -1,9 +1,8 @@
 import { Divider, Typography } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 import "./PeopleList.css";
-import { keys } from "@material-ui/core/styles/createBreakpoints";
 import "./Counter.css";
-import { formatDateStr, formatDate } from "../../common/formatDate";
+import { formatDateStr } from "../../common/formatDate";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -24,13 +23,11 @@ export default function PeopleList({ users, responseUsers }) {
   const [people, setPeople] = useState([]);
   const [perc, setPerc] = useState(null);
   const classes = useStyles();
-  const today = formatDate(new Date());
 
   useEffect(() => {
     if (users && responseUsers) {
       console.log(users);
       console.log(responseUsers);
-      var i = 0;
       var peopleArr = [];
       var numHas = 0;
       for (const [userKey, userValue] of Object.entries(users)) {

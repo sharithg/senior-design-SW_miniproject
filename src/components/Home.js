@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import Header from "./Main/Header";
 import Hero from "./Main/Hero";
@@ -35,7 +36,6 @@ export default class Home extends Component {
       }
     });
     this.setState({ counter: count });
-    console.log(this.state.counter);
   };
 
   onTermSubmit = (term) => {

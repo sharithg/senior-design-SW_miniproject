@@ -1,14 +1,10 @@
 import React from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import yellow from "@material-ui/core/colors/yellow";
 import "./Tracker.css";
 import {
   FormControlLabel,
   Checkbox,
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
   Typography,
   Button,
 } from "@material-ui/core";
@@ -94,8 +90,6 @@ class Tracker extends React.Component {
     var d = new Date();
     var today = formatDate(d);
     console.log(this.state.user.currentUser);
-    const userEmailSplit = this.state.user.currentUser.email.split("@");
-    const userEmail = `${userEmailSplit[0]}-${userEmailSplit[1]}`;
 
     const data = {};
     const user_id = this.state.user.currentUser.uid;
