@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-Senior Design miniproject: Covid 19 Tracker App. Collaborators: zamorai, sharithg.
+Senior Design miniproject: Covid 19 Tracker App. -------- Collaborator's github accounts: zamorai, sharithg --------
 
 ## Project Description.
 
@@ -86,5 +86,5 @@ This project used the full capacity of Firebase and it's authentication process,
 
 ## Contact Information
 
-Project was created by Iker Zamora and xx. Our github repositories are: zamorai and sharithg respectively. This project was done for Senior Design for Boston University. 
+Project was created by Iker Zamora and Sharith Godamanna. Our github repositories are: zamorai and sharithg respectively. This project was done for Senior Design for Boston University. 
 
