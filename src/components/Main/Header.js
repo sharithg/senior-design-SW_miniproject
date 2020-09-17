@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
-import { app, db } from "../../base";
+import React, { useContext, useState, useEffect } from "react";
+import { app, rdb } from "../../base";
 import { AuthContext } from "../../Auth";
 import { makeStyles } from "@material-ui/core/styles";
+import { formatDate } from "../../common/formatDate";
+import Loader from "../../common/Loader";
 
 import NotFound from "../../common/NotFound";
 import {
@@ -26,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
     color: "#000",
-    margin: 'auto'
+    margin: "auto",
   },
   textColor: {
     color: "#000",
@@ -37,30 +39,48 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header({counter}) {
-
-  const status = counter > 0 ? 'Time to get checked' : "Cleared"
+export default function Header({ counter }) {
+  const [status, setStatus] = useState("");
+  const { currentUser } = useContext(AuthContext);
   const classes = useStyles();
 
-  const { currentUser } = useContext(AuthContext);
+  useEffect(() => {
+    var today = formatDate(new Date());
+    var ref = rdb.ref(`responses/${today}`);
+    ref.on(
+      "value",
+      function (snapshot) {
+        if (snapshot.val()) {
+          console.log(today);
+          setStatus(
+            snapshot.val()[currentUser.uid].num_symptoms > 2
+              ? "Time to get checked"
+              : "Cleared"
+          );
+        } else setStatus("Please complete form");
+      },
+      function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      }
+    );
+  }, []);
 
-  db.collection("admins")
-    .get()
-    .then((snapshot) => {
-      //console.log(snapshot);
-    });
+  if (status === "") return <Loader />;
+
   return (
     <React.Fragment>
       <AppBar className={classes.navBar} position="static">
         <Toolbar>
-          <div className = {classes.root}>
-            <a href = "/" >
+          <div className={classes.root}>
+            <a href="/">
               <img className={classes.imgSize} src={Logo} alt="Logo image" />
             </a>
           </div>
+
           <Typography variant="body1" className={classes.title}>
-            Your current Covid status is: {status}  
+            Your current Covid status is: {status}
           </Typography>
+
           <Typography variant="body1" className={classes.textColor}>
             Logged in as:{" "}
             {currentUser.email.substring(0, currentUser.email.indexOf("@"))}

@@ -160,7 +160,9 @@ class Tracker extends React.Component {
             variant="h4"
             style={this.props.getStyles()}
           >
-            You need to get checked
+            {this.state.checked.filter((val) => val === true).length > 0
+              ? "You need to get checked"
+              : ""}
           </Typography>
         </div>
         <Button
