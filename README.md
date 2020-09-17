@@ -1,7 +1,8 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-Senior Design miniproject: Covid 19 Tracker App. -------- Collaborator's github accounts: zamorai, sharithg --------
+Senior Design miniproject: Covid 19 Tracker App.
+Collaborator's github accounts: [zamorai](https://github.com/zamorai), [sharithg](https://github.com/sharithg) 
 
 ## Project Description.
 
