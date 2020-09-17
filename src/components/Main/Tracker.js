@@ -168,6 +168,7 @@ class Tracker extends React.Component {
           color="primary"
           size="large"
           onClick={this.handleSubmit}
+          style={{ marginLeft: "10px", marginBottom: "10px" }}
         >
           Submit
         </Button>
