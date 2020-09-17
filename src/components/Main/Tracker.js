@@ -12,6 +12,8 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import { rdb } from "../../base";
+import { AuthContext } from "../../Auth";
 
 const YellowCheckbox = withStyles({
   root: {
@@ -52,25 +54,42 @@ const styles = (theme) => ({
     marginBottom: "3rem",
   },
 });
+function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
 
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+}
 class Tracker extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      checked: [false, false, false, false, false, false, false, false],
+      user: null,
+    };
     this.symptoms = [
+      "Fever or chills",
       "Coughing",
-      "Coughing",
-      "Coughing",
-      "Coughing",
-      "Coughing",
-      "Coughing",
-      "Coughing",
-      "Coughing",
+      "Shortness of breath or difficulty breathing",
+      "Fatigue",
+      "Muscle or body aches",
+      "Headache",
+      "New loss of taste or smell",
+      "Nausea or vomiting",
     ];
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  state = {
-    checked: [false, false, false, false, false, false, false, false],
-  };
+  static contextType = AuthContext;
+
+  componentDidMount() {
+    this.setState({ user: this.context });
+  }
 
   onCheckboxChange = (num) => {
     let check = [...this.state.checked];
@@ -78,6 +97,34 @@ class Tracker extends React.Component {
     this.setState({ checked: check }, () => {
       this.props.counterCheck(this.state.checked);
     });
+  };
+
+  handleSubmit = async () => {
+    var d = new Date();
+    var today = formatDate(d);
+    const userEmail = this.state.user.currentUser.email.split("@")[0];
+
+    const data = {};
+    data[userEmail] = {
+      num_symptoms: this.state.checked.filter((val) => val === true).length,
+    };
+    const dataObj = {
+      num_symptoms: this.state.checked.filter((val) => val === true).length,
+    };
+    var ref = rdb.ref(today);
+    ref.on(
+      "value",
+      function (snapshot) {
+        if (snapshot.val()) {
+          ref.child(userEmail).set(dataObj);
+        } else {
+          ref.set(data);
+        }
+      },
+      function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      }
+    );
   };
 
   render() {
@@ -89,6 +136,9 @@ class Tracker extends React.Component {
             Symptom tracker
           </Typography>
         </div>
+        <br />
+        <br />
+        <br />
         <div className={classes.container}>
           {this.symptoms.map((symptom, index) => (
             <FormControlLabel
@@ -104,7 +154,7 @@ class Tracker extends React.Component {
                 />
               }
               label={
-                <Typography className={classes.textColor} variant="h5">
+                <Typography className={classes.textColor} variant="h8">
                   {symptom}
                 </Typography>
               }
@@ -120,7 +170,12 @@ class Tracker extends React.Component {
             You need to get checked
           </Typography>
         </div>
-        <Button variant="contained" color="primary" size="large">
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          onClick={this.handleSubmit}
+        >
           Submit
         </Button>
       </div>

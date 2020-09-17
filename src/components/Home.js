@@ -4,6 +4,7 @@ import Hero from "./Main/Hero";
 import Tracker from "./Main/Tracker";
 import Search from "./Main/Search";
 import SearchBar from "./Main/SearchBar";
+import Helmet from "react-helmet";
 
 import axios from "axios";
 
@@ -16,9 +17,14 @@ export default class Home extends Component {
   };
 
   async componentDidMount() {
-    const results = await axios.get("https://api.covid19api.com/summary");
-
-    this.setState({ stats: results.data.Countries });
+    axios
+      .get("https://api.covid19api.com/summary")
+      .then((res) => {
+        if (res.data.Countries) {
+          this.setState({ stats: res.data.Countries });
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   counterCheck = (checked) => {
@@ -29,6 +35,7 @@ export default class Home extends Component {
       }
     });
     this.setState({ counter: count });
+    console.log(this.state.counter);
   };
 
   onTermSubmit = (term) => {
@@ -60,6 +67,9 @@ export default class Home extends Component {
   render() {
     return (
       <div>
+        <Helmet>
+          <title>CovidTrack &bull; Home</title>
+        </Helmet>
         <Header counter={this.state.counter} />
         <Hero stats={this.state.stats} />
         <Tracker
