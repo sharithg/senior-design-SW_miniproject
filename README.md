@@ -20,8 +20,8 @@ Simply log into the app using google auth or create your own account with email 
 
 To access the admin page please use the below credentials:
 
-username: jdcovidad@gmail.com
-password: CovidAdmin123
+* username: jdcovidad@gmail.com
+* password: CovidAdmin123
 
 ## Tests
 
