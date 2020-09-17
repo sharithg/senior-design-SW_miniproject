@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./PeopleList.css";
 import { keys } from "@material-ui/core/styles/createBreakpoints";
 import "./Counter.css";
+import { formatDateStr, formatDate } from "../../common/formatDate";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -23,6 +24,7 @@ export default function PeopleList({ users, responseUsers }) {
   const [people, setPeople] = useState([]);
   const [perc, setPerc] = useState(null);
   const classes = useStyles();
+  const today = formatDate(new Date());
 
   useEffect(() => {
     if (users && responseUsers) {
@@ -51,6 +53,12 @@ export default function PeopleList({ users, responseUsers }) {
   return (
     <div className="main-container">
       <Typography variant="h2">Admin Panel</Typography>
+      <br />
+      <br />
+      <br />
+      <Typography variant="h4">
+        User responses for {formatDateStr(new Date())}
+      </Typography>
       <div className="peopleList-container">
         <TableContainer component={Paper}>
           <Table

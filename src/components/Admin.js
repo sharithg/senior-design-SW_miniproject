@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import Header from "./Main/Header";
 import PeopleList from "./Admin/PeopleList";
 import Counter from "./Admin/Counter";
-import formatDate from "../common/formatDate";
+import { formatDate } from "../common/formatDate";
 import { rdb } from "../base";
 
 import "./Admin.css";

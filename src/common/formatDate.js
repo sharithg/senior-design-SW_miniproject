@@ -10,4 +10,44 @@ function formatDate(date) {
   return [year, month, day].join("-");
 }
 
-export default formatDate;
+function formatDateStr(date) {
+  var d = new Date(date),
+    month = d.getMonth(),
+    day = d.getDate(),
+    year = d.getFullYear();
+
+  var dayPostfix;
+  switch (day) {
+    case day === 1:
+      dayPostfix = "st";
+      break;
+    case day === 2:
+      dayPostfix = "nd";
+      break;
+    case day === 3:
+      dayPostfix = "rd";
+      break;
+    default:
+      dayPostfix = "th";
+      break;
+  }
+
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  return `${monthNames[month]} ${day}${dayPostfix}, ${year}`;
+}
+
+export { formatDate, formatDateStr };

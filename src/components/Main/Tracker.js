@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { rdb } from "../../base";
 import { AuthContext } from "../../Auth";
-import formatDate from "../../common/formatDate";
+import { formatDate } from "../../common/formatDate";
 
 const YellowCheckbox = withStyles({
   root: {
