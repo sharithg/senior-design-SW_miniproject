@@ -1,0 +1,19 @@
+.counter-container {
+  text-align: center;
+  margin-top: 2rem;  
+}
+
+.counter-text{
+  margin-bottom: 1rem;  
+} 
+
+.alt-text{
+  margin-top: 1rem;
+}
+
+.divider {
+  width: 80%;
+  display: flex;
+  justify-content: center; 
+  transform: translateX(12%); 
+ } 

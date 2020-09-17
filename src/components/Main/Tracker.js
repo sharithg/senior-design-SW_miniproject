@@ -111,7 +111,7 @@ class Tracker extends React.Component {
     const dataObj = {
       num_symptoms: this.state.checked.filter((val) => val === true).length,
     };
-    var ref = rdb.ref(today);
+    var ref = rdb.ref(`responses/${today}`);
     ref.on(
       "value",
       function (snapshot) {
