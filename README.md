@@ -1,5 +1,22 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+Senior Design miniproject: Covid 19 Tracker App. -------- Collaborator's github accounts: zamorai, sharithg --------
+
+## Project Description.
+
+The desktop application includes the following functionality:
+
+* **Track deaths of the top countries in the world** 
+* **Checklist of possible symptoms that indicate Covid-19 presence**
+* **Table with information from Covid-19 API that lists the stats of every country in the world**
+* **Admin page that tracks community symptoms**  
+
+Simply log into the app using google auth or create your own account with email and password. The information is sent to our firebase and we log the information on the back-end. Once you log into the application, you can check the checkboxes that represent your symptoms you may be having and click the blue submit button on the bottom left corner. That will automatically send your symptoms to the database and update our admin page to reflect the changes. At the bottom of the app you can also input any country in the world (countries with spaces may be differend, like United States of America can be found by inputing united-states) to get today's new Covid cases and total cases and more. 
+
+**Here is the example page hosted on netlify:** The [Project](https://5f63d15bcfe63e0008233746--heuristic-meninsky-b6057c.netlify.app/) 
+
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -31,12 +48,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
@@ -66,3 +77,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `yarn build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+## Licensing.
+
+This project used the full capacity of Firebase and it's authentication process, as well as serving as the backend to the project. We also used dependencies such as Axios for working with the API's, Material-UI for some of the design, create-react-app and its relevant scripts to work and bootstrap the project, as well as jest to run some tests. The routing of the website was done using React Router DOM. 
+
+
+## Contact Information
+
+Project was created by Iker Zamora and Sharith Godamanna. Our github repositories are: zamorai and sharithg respectively. This project was done for Senior Design for Boston University. 
+
