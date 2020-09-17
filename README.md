@@ -7,7 +7,7 @@ Senior Design miniproject: Covid 19 Tracker App. Collaborators: zamorai, sharith
 
 The desktop application includes the following functionality:
 
-* **Track deaths of the top countries in the world** (You can reuse the repo description you used earlier because this section doesn’t have to be long.)
+* **Track deaths of the top countries in the world** 
 * **Checklist of possible symptoms that indicate Covid-19 presence**
 * **Table with information from Covid-19 API that lists the stats of every country in the world**
 * **Admin page that tracks community symptoms**  
