@@ -1,9 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-Senior Design miniproject: Covid 19 Tracker App. Collaboratos: zamorai, sharithg.
+Senior Design miniproject: Covid 19 Tracker App. Collaborators: zamorai, sharithg.
 
-## A description of what the project is for.
+## Project Description.
 
 The desktop application includes the following functionality:
 
