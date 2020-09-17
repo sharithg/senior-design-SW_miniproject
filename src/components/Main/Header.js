@@ -44,8 +44,8 @@ export default function Header({ counter }) {
     ref.on(
       "value",
       function (snapshot) {
-        if (snapshot.val()) {
-          console.log(today);
+        if (snapshot.val()[currentUser.uid] != undefined) {
+          console.log(snapshot.val()[currentUser.uid]);
           setStatus(
             snapshot.val()[currentUser.uid].num_symptoms > 2
               ? "Time to get checked"
