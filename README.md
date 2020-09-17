@@ -15,7 +15,7 @@ The desktop application includes the following functionality:
 
 Simply log into the app using google auth or create your own account with email and password. The information is sent to our firebase and we log the information on the back-end. Once you log into the application, you can check the checkboxes that represent your symptoms you may be having and click the blue submit button on the bottom left corner. That will automatically send your symptoms to the database and update our admin page to reflect the changes. At the bottom of the app you can also input any country in the world (countries with spaces may be differend, like United States of America can be found by inputing united-states) to get today's new Covid cases and total cases and more. 
 
-**Here is the project hosted on netlify:** [CovidTrack](https://5f63d15bcfe63e0008233746--heuristic-meninsky-b6057c.netlify.app/) 
+**Here is the project hosted on netlify:** [CovidTrack](https://heuristic-meninsky-b6057c.netlify.app) 
 
 To run locally:
 
