@@ -12,6 +12,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Loader from "../../common/Loader";
 
 const useStyles = makeStyles({
   table: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 export default function PeopleList({ users, responseUsers, adminUsers }) {
-  const [people, setPeople] = useState([]);
+  const [people, setPeople] = useState([null]);
   const [perc, setPerc] = useState(null);
   const classes = useStyles();
 
@@ -46,6 +47,8 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
       setPeople(peopleArr);
     }
   }, [users, responseUsers]);
+
+  if (people[0] == null) return <Loader />;
 
   return (
     <div className="main-container">
