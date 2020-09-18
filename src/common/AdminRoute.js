@@ -32,7 +32,7 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
         if (adminUsers === undefined || adminUsers.length === 0)
           return <Loader />;
         else if (adminUsers.includes(currentUser.email))
-          return <RouteComponent {...routeProps} />;
+          return <RouteComponent {...routeProps} adminUsers={adminUsers} />;
         else
           return (
             <NotFound

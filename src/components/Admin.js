@@ -102,6 +102,7 @@ class Admin extends React.Component {
         <PeopleList
           users={this.state.users}
           responseUsers={this.state.responseUsers}
+          adminUsers={this.props.adminUsers}
         />
       </div>
     );
