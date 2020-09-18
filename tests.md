@@ -23,6 +23,12 @@
 - [x] Percentage: correctly calculate percentage with symptoms
 
 ``` bash
-npm i
+npm i -g yarn
+cd /to/project/directory/containing/package.json/
+yarn
+```
+once packages are installed:
+``` bash
+yarn start
 ```
 
