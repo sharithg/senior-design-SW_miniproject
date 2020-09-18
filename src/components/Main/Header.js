@@ -44,7 +44,7 @@ export default function Header({ counter }) {
     ref.on(
       "value",
       function (snapshot) {
-        if (snapshot.val()[currentUser.uid] != undefined) {
+        if (snapshot.val()[currentUser.uid].num_symptoms != undefined) {
           console.log(snapshot.val()[currentUser.uid]);
           setStatus(
             snapshot.val()[currentUser.uid].num_symptoms > 2
