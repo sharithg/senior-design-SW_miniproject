@@ -32,12 +32,7 @@ yarn start
 
 ## Admin Info
 
-To access the admin page please use the below credentials:
-
-- username: jdcovidad@gmail.com
-- password: CovidAdmin123
-
-And go to /admin route
+BU Emails of Professor Pisano, Hirsch, and Alshaykh have been added as Admins, So please log in with google and use your respective bu emails.
 
 ## Tests
 
