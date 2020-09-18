@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Header({ counter }) {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("Please complete form");
   const { currentUser } = useContext(AuthContext);
   const classes = useStyles();
 
@@ -44,14 +44,13 @@ export default function Header({ counter }) {
     ref.on(
       "value",
       function (snapshot) {
-        if (snapshot.val()[currentUser.uid] != undefined) {
-          if (snapshot.val()[currentUser.uid].num_symptoms)
-            setStatus(
-              snapshot.val()[currentUser.uid].num_symptoms > 2
-                ? "Time to get checked"
-                : "Cleared"
-            );
-        } else setStatus("Please complete form");
+        try {
+          setStatus(
+            snapshot.val()[currentUser.uid].num_symptoms > 2
+              ? "Time to get checked"
+              : "Cleared"
+          );
+        } catch (err) {}
       },
       function (errorObject) {
         console.log("The read failed: " + errorObject.code);
