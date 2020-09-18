@@ -44,13 +44,13 @@ export default function Header({ counter }) {
     ref.on(
       "value",
       function (snapshot) {
-        if (snapshot.val()[currentUser.uid].num_symptoms != undefined) {
-          console.log(snapshot.val()[currentUser.uid]);
-          setStatus(
-            snapshot.val()[currentUser.uid].num_symptoms > 2
-              ? "Time to get checked"
-              : "Cleared"
-          );
+        if (snapshot.val()[currentUser.uid] != undefined) {
+          if (snapshot.val()[currentUser.uid].num_symptoms != null)
+            setStatus(
+              snapshot.val()[currentUser.uid].num_symptoms > 2
+                ? "Time to get checked"
+                : "Cleared"
+            );
         } else setStatus("Please complete form");
       },
       function (errorObject) {
