@@ -6,18 +6,41 @@ import Tracker from "./Main/Tracker";
 import Search from "./Main/Search";
 import SearchBar from "./Main/SearchBar";
 import Helmet from "react-helmet";
+import { db } from "../base";
+import { Grid, Paper, Typography } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
+const styles = (theme) => ({
+  paper: {
+    padding: theme.spacing(0),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+    background: "orange",
+  },
+});
 import axios from "axios";
 
-export default class Home extends Component {
+class Home extends Component {
   state = {
     stats: [],
     counter: 0,
     symptoms: [],
     country: [],
+    admins: [],
   };
 
   async componentDidMount() {
+    var admins = [];
+    db.collection("admins")
+      .get()
+      .then((snapshot) => {
+        snapshot.docs.forEach((doc) => {
+          admins.push(doc.data().email);
+        });
+
+        this.setState({ admins: admins });
+        console.log(this.props.currentUser.email);
+      });
     axios
       .get("https://api.covid19api.com/summary")
       .then((res) => {
@@ -65,12 +88,29 @@ export default class Home extends Component {
   };
 
   render() {
+    const { classes } = this.props;
+    const currnetUserEmail = this.props.currentUser.email;
     return (
       <div>
         <Helmet>
           <title>CovidTrack &bull; Home</title>
         </Helmet>
         <Header counter={this.state.counter} />
+        {this.state.admins.includes(currnetUserEmail) ? (
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Typography variant="h6">
+                  Welcome admin {currnetUserEmail.split("@")[0]}.{" "}
+                  <a href="/admin">Go to admin page?</a>
+                </Typography>
+              </Paper>
+            </Grid>
+          </Grid>
+        ) : (
+          <div />
+        )}
+
         <Hero stats={this.state.stats} />
         <Tracker
           counterCheck={this.counterCheck}
@@ -95,3 +135,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withStyles(styles)(Home);
