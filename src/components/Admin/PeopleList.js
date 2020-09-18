@@ -77,8 +77,8 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
                     <TableRow key={index}>
                       <TableCell align="left">
                         {adminUsers.includes(person.email)
-                          ? person.email
-                          : `${person.email} (Admin)`}
+                          ? `${person.email} (Admin)`
+                          : person.email}
                       </TableCell>
                       <TableCell align="left">
                         {person.hasResponded ? "Yes" : "No"}
