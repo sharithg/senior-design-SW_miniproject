@@ -27,6 +27,7 @@ class Home extends Component {
     symptoms: [],
     country: [],
     admins: [],
+    term: "",
   };
 
   async componentDidMount() {
@@ -62,11 +63,18 @@ class Home extends Component {
   };
 
   onTermSubmit = (term) => {
-    this.setState({
-      country: this.state.stats.filter((el) => {
-        return el.Slug === term.toLowerCase();
-      }),
+    this.setState({ term });
+    const countrys = this.state.stats.filter((el) => {
+      return el.Slug === term.toLowerCase();
     });
+    if (countrys.length === 0)
+      this.setState({
+        country: ["null"],
+      });
+    else
+      this.setState({
+        country: countrys,
+      });
   };
 
   getStyles = () => {
@@ -129,7 +137,7 @@ class Home extends Component {
           }}
         >
           <SearchBar onTermSubmit={this.onTermSubmit} />
-          <Search country={this.state.country} />
+          <Search country={this.state.country} term={this.state.term} />
         </div>
       </div>
     );
