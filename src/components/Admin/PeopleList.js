@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./PeopleList.css";
 import "./Counter.css";
 import { formatDateStr } from "../../common/formatDate";
+import { AuthContext } from "../../Auth";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -23,6 +24,7 @@ export default function PeopleList({ users, responseUsers }) {
   const [people, setPeople] = useState([]);
   const [perc, setPerc] = useState(null);
   const classes = useStyles();
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (users && responseUsers) {
@@ -75,7 +77,11 @@ export default function PeopleList({ users, responseUsers }) {
                 <React.Fragment>
                   {people.map((person, index) => (
                     <TableRow key={index}>
-                      <TableCell align="left">{person.email}</TableCell>
+                      <TableCell align="left">
+                        {person.email === currentUser.email
+                          ? person.email
+                          : `${person.email} (Admin)`}
+                      </TableCell>
                       <TableCell align="left">
                         {person.hasResponded ? "Yes" : "No"}
                       </TableCell>
