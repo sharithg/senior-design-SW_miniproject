@@ -56,7 +56,7 @@ BU Emails of Professor Pisano, Hirsch, and Alshaykh have been added as Admins, S
 - [x] Main body: Submit form repeatedly &#8594; overrites existing info
 - [x] Main body: Submit form &#8594; shows colors for covid status
 - [x] Bottom body: Shows country info when typed
-- [ ] Bottom body: Shows error when wrong country
+- [ ] Bottom body: Country search for some countrys with spaces does not work
 
 ### Admin page
 
