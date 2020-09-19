@@ -12,7 +12,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Loader from "../../common/Loader";
 
 const useStyles = makeStyles({
   table: {
@@ -41,6 +40,7 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
             if (resValue.num_symptoms > 0) numHas++;
           }
         }
+        console.log({ email: userValue.email, hasResponded, num_symptoms });
         peopleArr.push({ email: userValue.email, hasResponded, num_symptoms });
       }
       setPerc((numHas / peopleArr.length) * 100);
@@ -48,7 +48,7 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
     }
   }, [users, responseUsers]);
 
-  if (people[0] == null) return <Loader />;
+  // if (people[0] == null) return <Loader />;
 
   return (
     <div className="main-container">
@@ -74,7 +74,7 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {people.length > 0 ? (
+              {people[0] != null && people.length > 0 ? (
                 <React.Fragment>
                   {people.map((person, index) => (
                     <TableRow key={index}>
@@ -97,7 +97,7 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
                   ))}
                 </React.Fragment>
               ) : (
-                <Typography variant="h2">No users responded today</Typography>
+                <Typography variant="h6">No users responded today</Typography>
               )}
             </TableBody>
           </Table>
@@ -111,12 +111,12 @@ export default function PeopleList({ users, responseUsers, adminUsers }) {
         </div>
         <Divider className="divider" />
         <div className="alt-text">
-          {people.length > 0 ? (
+          {people[0] != null && people.length > 0 ? (
             <React.Fragment>
               <Typography variant="h2">{perc.toFixed(0)}%</Typography>
             </React.Fragment>
           ) : (
-            <Typography variant="h2">No users responded today</Typography>
+            <div />
           )}
         </div>
       </div>
