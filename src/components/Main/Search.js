@@ -4,7 +4,6 @@ import "./Search.css";
 
 export default function Search({ country, term }) {
   console.log(country);
-  const { sTerm } = term;
 
   if (country[0] === undefined) {
     return (
