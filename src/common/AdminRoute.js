@@ -24,8 +24,6 @@ const AdminRoute = ({ component: RouteComponent, ...rest }) => {
     retriveAdmins();
   }, []);
 
-  console.log(adminUsers);
-
   return (
     <Route
       {...rest}
