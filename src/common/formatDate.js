@@ -10,27 +10,26 @@ function formatDate(date) {
   return [year, month, day].join("-");
 }
 
+function ordinal_suffix_of(i) {
+  var j = i % 10,
+    k = i % 100;
+  if (j === 1 && k !== 11) {
+    return i + "st";
+  }
+  if (j === 2 && k !== 12) {
+    return i + "nd";
+  }
+  if (j === 3 && k !== 13) {
+    return i + "rd";
+  }
+  return i + "th";
+}
+
 function formatDateStr(date) {
   var d = new Date(date),
     month = d.getMonth(),
     day = d.getDate(),
     year = d.getFullYear();
-
-  var dayPostfix;
-  switch (day) {
-    case day === 1:
-      dayPostfix = "st";
-      break;
-    case day === 2:
-      dayPostfix = "nd";
-      break;
-    case day === 3:
-      dayPostfix = "rd";
-      break;
-    default:
-      dayPostfix = "th";
-      break;
-  }
 
   const monthNames = [
     "January",
@@ -47,7 +46,7 @@ function formatDateStr(date) {
     "December",
   ];
 
-  return `${monthNames[month]} ${day}${dayPostfix}, ${year}`;
+  return `${monthNames[month]} ${ordinal_suffix_of(day)}, ${year}`;
 }
 
 export { formatDate, formatDateStr };
